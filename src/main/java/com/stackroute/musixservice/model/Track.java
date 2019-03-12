@@ -1,11 +1,19 @@
 package com.stackroute.musixservice.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,36 +21,8 @@ public class Track {
     private String trackName;
     private String comment;
 
-    public Track() {
-    }
-
-    public Track(int trackId, String trackName, String comment) {
-        this.trackId = trackId;
+    public Track(String trackName, String comment) {
         this.trackName = trackName;
-        this.comment = comment;
-    }
-
-    public int getTrackId() {
-        return trackId;
-    }
-
-    public void setTrackId(int trackId) {
-        this.trackId = trackId;
-    }
-
-    public String getTrackName() {
-        return trackName;
-    }
-
-    public void setTrackName(String trackName) {
-        this.trackName = trackName;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
         this.comment = comment;
     }
 }
