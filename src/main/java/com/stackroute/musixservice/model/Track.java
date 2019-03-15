@@ -2,26 +2,36 @@ package com.stackroute.musixservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
-@Entity
+import javax.validation.constraints.Size;
+import java.util.UUID;
+
+
+@Document("Track")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Track {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int trackId;
+    private String trackId;
+    @NotNull(message = "track name should not be null")
+    @Size(min = 1,message = "track name should not be empty")
     private String trackName;
+    @NotNull(message = "track comment should not be null")
+    @Size(min = 1,message = "track comment should not be empty")
     private String comment;
 
+    // to generate random id
+    public Track() {
+        this.trackId= UUID.randomUUID().toString();
+    }
+
     public Track(String trackName, String comment) {
+        this();
         this.trackName = trackName;
         this.comment = comment;
     }
